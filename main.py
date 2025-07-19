@@ -5,12 +5,11 @@ from torch.utils.data import DataLoader
 import nets
 from mydatasets import adult
 from methods.kmeans import KMeansSelection
-from model_utils import train_model, evaluate_model  # 新的训练/评估函数
+from model_utils import train_model, evaluate_model 
 
-########################################################
-####### 如果你有新加入的模型或方法，请确保在这里导入它们 #######
-########################################################
-# 例如， from methods.some_other_method import SomeOtherSelection
+################################################################
+####### if you have new methods, please import them here #######
+################################################################
 
 # 基本参数设置
 data_path = "mydatasets"
@@ -30,10 +29,10 @@ selection_lr = 0.001
 selection_momentum = 0.9
 selection_weight_decay = 5e-4
 
-# 数据处理
+# process data
 channel, im_size, num_classes, class_names, mean, std, dst_train, dst_val, dst_test = adult(data_path, balance_target)
 
-# 初始化一个 nn.Module 实例（用于后面选择和正式训练）
+# initialize a nn.Module instance (for selection and training)
 base_model = nets.__dict__[model_name](
     channel=channel,
     num_classes=num_classes,
@@ -41,7 +40,7 @@ base_model = nets.__dict__[model_name](
     pretrained=False
 )
 
-# 核心集选择
+# core set selection
 selector = KMeansSelection()
 core_loader = selector.select(
     model=base_model,
@@ -52,13 +51,13 @@ core_loader = selector.select(
     device=device
 )
 
-# 正式训练（会保存并加载 best_model_path）
+# training
 trained_model = train_model(
-    model=base_model,              # nn.Module 实例
-    train_loader=core_loader,      # 选出的核心集 DataLoader
+    model=base_model,              # nn.Module instance
+    train_loader=core_loader,      # core set DataLoader
     val_loader=DataLoader(
         dst_val, batch_size=batch_size, shuffle=False
-    ),                              # 验证集 DataLoader
+    ),                              # validation set DataLoader
     device=device,
     task_type=task_type,
     epochs=epochs,
@@ -69,7 +68,7 @@ trained_model = train_model(
     best_model_path=best_model_path
 )
 
-# 在测试集上评估
+# evaluate on test set
 evaluate_model(
     model=trained_model,
     best_model_path=best_model_path,

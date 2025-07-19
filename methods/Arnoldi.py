@@ -11,7 +11,7 @@ import time
 from collections import Counter
 import gc
 
-# 启用异常检测
+
 torch.autograd.set_detect_anomaly(True)
 
 def calc_loss(y, t):
@@ -36,75 +36,59 @@ def hvp(loss, params, v):
     return hv
 
 def split_vector(vector, params):
-    """
-    将一个展开的向量拆分成与参数形状匹配的张量列表。
-    确保每个切片后的张量是连续的。
-    """
     splits = []
     index = 0
     for p in params:
         if p.requires_grad:
             num = p.numel()
-            # 使用 .clone() 和 .reshape() 确保张量是连续的
             splits.append(vector[index:index+num].clone().reshape(p.size()).contiguous())
             index += num
     return splits
 
 def arnoldi_influence(loss, params, grad_test, recursion_depth, damping=0.01, scale=25.0):
-    """
-    实现 Arnoldi Influence 算法。
-    """
-    # 将参数展平成一个单一向量
     params_flat = torch.cat([p.reshape(-1) for p in params if p.requires_grad])
     grad_test_flat = torch.cat([g.reshape(-1) for g in grad_test])
     n = len(params_flat)
 
-    # 初始化 Arnoldi 基和 Hessenberg 矩阵，确保它们不参与梯度计算
+s
     with torch.no_grad():
         Q = torch.zeros((n, recursion_depth), device=grad_test_flat.device)
         H = torch.zeros((recursion_depth, recursion_depth), device=grad_test_flat.device)
 
-        # 归一化 grad_test_flat 以开始 Arnoldi 过程
         Q[:, 0] = grad_test_flat / grad_test_flat.norm()
 
     for k in range(recursion_depth - 1):
-        # 将 Q[:, k] 拆分为与参数形状匹配的张量列表
+
         v = split_vector(Q[:, k], params)
 
-        # 计算 Krylov 子空间中的新向量
         grad_k = hvp(loss, params, v)
         grad_k_flat = torch.cat([g.reshape(-1) for g in grad_k])
 
-        # 对之前的基向量进行正交化
         for j in range(k + 1):
             H_jk = torch.dot(Q[:, j], grad_k_flat)
-            # 替换原地操作为非原地操作
+
             grad_k_flat = grad_k_flat - H_jk * Q[:, j]
-            # 修改 H[j, k] 也在 no_grad() 环境中
+
             with torch.no_grad():
                 H[j, k] = H_jk
 
-        # 归一化向量
         H_k1k = grad_k_flat.norm()
         with torch.no_grad():
             H[k + 1, k] = H_k1k
-            if H_k1k > 1e-6:  # 检查向量是否线性独立
+            if H_k1k > 1e-6:  
                 Q[:, k + 1] = grad_k_flat / H_k1k
             else:
-                print(f"由于线性依赖，在第 {k+1} 次迭代终止 Arnoldi 过程。")
-                break  # 如果线性相关，提前终止 Arnoldi 过程
+                break 
 
-    # 确定实际完成的迭代次数
     actual_depth = k + 1
 
-    # 解决 Hessenberg 系统以获得影响分数
     try:
         influence_scores = torch.linalg.solve(
             H[:actual_depth, :actual_depth],
             Q[:, :actual_depth].T @ grad_test_flat
         )
     except RuntimeError as e:
-        print("解决 Hessenberg 系统时出错:", e)
+        print("error:", e)
         influence_scores = torch.zeros(n, device=grad_test_flat.device)
 
     return influence_scores
