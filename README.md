@@ -73,7 +73,7 @@ import torch
 from torch.utils.data import DataLoader
 import nets
 from mydatasets import adult
-from methods.kmeans import KMeansSelection
+from selection.kmeans import KMeansSelection
 from model_utils import train_model, evaluate_model
 
 # ⚙️ Basic configuration
@@ -136,29 +136,28 @@ evaluate_model(
 | Method | Category | Description | Implementation |
 |--------|----------|-------------|----------------|
 | **K-Means** | Model-agnostic | Clustering-based selection using K-means algorithm | ✅ [selection/kmeans.py](selection/kmeans.py) |
-| **Herding** | Model-agnostic | Core-set selection using herding algorithm | ✅ [methods/herding.py](methods/herding.py) |
-| **K-Center Greedy** | Model-agnostic | Greedy k-center clustering for core-set selection | ✅ [methods/kcentergreedy.py](methods/kcentergreedy.py) |
-| **Low Dimension** | Model-agnostic | Selection in low-dimensional space | ✅ [methods/lowdimention.py](methods/lowdimention.py) |
-| **Random** | Model-agnostic | Random sampling baseline | ✅ [methods/random.py](methods/random.py) |
-| **Full** | Model-agnostic | Full dataset training baseline | ✅ [methods/full.py](methods/full.py) |
-| **CRAIG** | Model-aware | Gradient-based core-set selection | ✅ [methods/craig.py](methods/craig.py) |
-| **GradMatch** | Model-aware | Gradient matching for data selection | ✅ [methods/gradmatch.py](methods/gradmatch.py) |
-| **GLISTER** | Model-aware | Generalization based data subset selection | ✅ [methods/glister.py](methods/glister.py) |
-| **CREST** | Model-aware | Core-set selection with gradient-based scoring | ✅ [methods/crest.py](methods/crest.py) |
-| **TracIn** | Model-aware | Training data influence estimation | ✅ [methods/TracIn.py](methods/TracIn.py) |
-| **LiSSA** | Model-aware | Linear time second-order algorithm | ✅ [methods/LiSSA.py](methods/LiSSA.py) |
-| **Arnoldi** | Model-aware | Arnoldi iteration for influence computation | ✅ [methods/Arnoldi.py](methods/Arnoldi.py) |
-| **TMCS** | Model-aware | Training data influence with Monte Carlo sampling | ✅ [methods/TMCS.py](methods/TMCS.py) |
-| **KNN-Shapley** | Model-aware | K-nearest neighbors Shapley value estimation | ✅ [methods/KNN_shapley.py](methods/KNN_shapley.py) |
-| **CS-Shapley** | Model-aware | Core-set Shapley value computation | ✅ [methods/cs_shapley.py](methods/cs_shapley.py) |
-| **G-Shapley** | Model-aware | Gradient-based Shapley value estimation | ✅ [methods/G_shapley.py](methods/G_shapley.py) |
-| **DVRL** | Model-aware | Data valuation using reinforcement learning | ✅ [methods/dvrl.py](methods/dvrl.py) |
-| **DBAL** | Model-aware | Deep batch active learning | ✅ [methods/dbal.py](methods/dbal.py) |
-| **DFAL** | Model-aware | Deep fool active learning | ✅ [methods/dfal.py](methods/dfal.py) |
-| **Boundary Aware** | Model-aware | Boundary-aware data selection | ✅ [methods/boundary_aware.py](methods/boundary_aware.py) |
-| **CG-Influence** | Model-aware | Conjugate gradient influence estimation | ✅ [methods/cg_influence.py](methods/cg_influence.py) |
-| **SVP Max Entropy** | Model-aware | Support vector perturbation with maximum entropy | ✅ [methods/svp_max_entropy.py](methods/svp_max_entropy.py) |
-| **IAS** | Model-aware | Influence-aware subset selection | ✅ [methods/IAS.py](methods/IAS.py) |
+| **Herding** | Model-agnostic | Core-set selection using herding algorithm | ✅ [selection/herding.py](selection/herding.py) |
+| **K-Center Greedy** | Model-agnostic | Greedy k-center clustering for core-set selection | ✅ [selection/kcentergreedy.py](selection/kcentergreedy.py) |
+| **Random** | Model-agnostic | Random sampling baseline | ✅ [selection/random.py](selection/random.py) |
+| **Full** | Model-agnostic | Full dataset training baseline | ✅ [selection/full.py](selection/full.py) |
+| **CRAIG** | Model-aware | Gradient-based core-set selection | ✅ [selection/craig.py](selection/craig.py) |
+| **GradMatch** | Model-aware | Gradient matching for data selection | ✅ [selection/gradmatch.py](selection/gradmatch.py) |
+| **GLISTER** | Model-aware | Glister selection | ✅ [selection/glister.py](selection/glister.py) |
+| **CREST** | Model-aware | Core-set selection with gradient-based scoring | ✅ [selection/crest.py](selection/crest.py) |
+| **TracIn** | Model-aware | Training data influence estimation | ✅ [selection/TracIn.py](selection/TracIn.py) |
+| **LiSSA** | Model-aware | Linear time second-order algorithm | ✅ [selection/LiSSA.py](selection/LiSSA.py) |
+| **Arnoldi** | Model-aware | Arnoldi iteration for influence computation | ✅ [selection/Arnoldi.py](selection/Arnoldi.py) |
+| **TMCS** | Model-aware | Monte Carlo Shapley Value estimation | ✅ [selection/TMCS.py](selection/TMCS.py) |
+| **KNN-Shapley** | Model-aware | K-nearest neighbors Shapley value estimation | ✅ [selection/KNN_shapley.py](selection/KNN_shapley.py) |
+| **CS-Shapley** | Model-aware | Class-wise Shapley value computation | ✅ [selection/cs_shapley.py](selection/cs_shapley.py) |
+| **G-Shapley** | Model-aware | G-Shapley value estimation | ✅ [selection/G_shapley.py](selection/G_shapley.py) |
+| **DVRL** | Model-aware | Data valuation using reinforcement learning | ✅ [selection/dvrl.py](selection/dvrl.py) |
+| **DBAL** | Model-aware | Deep bayesian active learning | ✅ [selection/dbal.py](selection/dbal.py) |
+| **DFAL** | Model-aware | Deep fool active learning | ✅ [selection/dfal.py](selection/dfal.py) |
+| **Boundary Aware** | Model-aware | Boundary-aware data selection | ✅ [selection/boundary_aware.py](selection/boundary_aware.py) |
+| **CG-Influence** | Model-aware | Conjugate gradient influence estimation | ✅ [selection/cg_influence.py](selection/cg_influence.py) |
+| **SVP Max Entropy** | Model-aware |  maximum entropy with proxy model | ✅ [selection/svp_max_entropy.py](selection/svp_max_entropy.py) |
+
 
 ### 🤖 Supported Models
 
@@ -406,7 +405,7 @@ If you find this testbed useful in your research, please cite our paper:
 
 ### 🔧 Adding New Methods
 
-📁 **1. Create a new file** in the `methods/` directory
+📁 **1. Create a new file** in the `selection/` directory
 ⚙️ **2. Implement the selection interface**
 🔗 **3. Add the method** to `import_methods.py`
 📝 **4. Update the documentation**

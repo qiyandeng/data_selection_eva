@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 
 import nets
 from mydatasets import adult
-from methods.kmeans import KMeansSelection
+from selection.kmeans import KMeansSelection
 from model_utils import train_model, evaluate_model 
 
 ################################################################
