@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 <div align="center">
-  <img src="image/dseva.png" width="80%" alt="Data Selection surface">
+  <img src="image/dseva.png" width="60%" alt="Data Selection surface">
 </div>
 
 The success of supervised deep learning depends on the quantity and quality of labeled training data. However, as training datasets grow larger, they inevitably contain noisy or even harmful instances, increasing computational costs and hindering model performance. Existing data selection strategies typically focus on improving training effectiveness by selecting high-quality data or increasing efficiency by reducing training time without sacrificing accuracy. 
