@@ -4,6 +4,10 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.0+-red.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+<div align="center">
+  <img src="./image/dseva.png" width="80%" alt="Data Selection Workflow">
+</div>
+
 The success of supervised deep learning depends on the quantity and quality of labeled training data. However, as training datasets grow larger, they inevitably contain noisy or even harmful instances, increasing computational costs and hindering model performance. Existing data selection strategies typically focus on improving training effectiveness by selecting high-quality data or increasing efficiency by reducing training time without sacrificing accuracy. 
 
 Although numerous data selection methods have been proposed, ranging from efficiency-focused to effectiveness-focused strategies and from model-agnostic to model-aware approaches, their performance varies significantly across datasets and tasks, with no universally superior method identified to date. This work presents the first comprehensive survey and empirical evaluation of representative data selection methods, spanning traditional deep learning and supervised fine-tuning (SFT) for large language models (LLMs). We introduce a unified open-source testbed that implements 15 methods and systematically evaluates them under various datasets, model architectures, etc. Furthermore, we extend the evaluation to SFT for LLMs, benchmarking 10 popular methods on 4 downstream tasks. Our results provide actionable insights into the strengths, limitations, and practical trade-offs of different strategies, offering valuable guidance to researchers and practitioners in selecting the appropriate data selection methods for their specific scenarios
