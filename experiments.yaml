@@ -1,0 +1,165 @@
+# experiments.yaml - 数据选择实验配置文件
+
+general:
+  # 数据集配置
+  data_path: "mydatasets"
+  dataset: "adult"
+  balance_target: true
+  
+  # 模型配置
+  model_name: "MLP"
+  task_type: "classification"
+  device: "auto"  # auto, cpu, cuda
+  
+  # 训练参数
+  epochs: 20
+  batch_size: 128
+  patience: 8
+  selection_lr: 0.001
+  selection_momentum: 0.9
+  selection_weight_decay: 0.0005
+
+# 实验列表 - 多方法多比例对比
+experiments:
+
+  # CG Influence方法 - 不同选择比例
+  - name: "arnoldi_01percent"
+    method: "arnoldi"
+    selection_fraction: 0.01
+    recursion_depth: 10
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_05percent"
+    method: "arnoldi"
+    selection_fraction: 0.05
+    recursion_depth: 15
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_10percent"
+    method: "arnoldi"
+    selection_fraction: 0.1
+    recursion_depth: 20
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_20percent"
+    method: "arnoldi"
+    selection_fraction: 0.2
+    recursion_depth: 25
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_30percent"
+    method: "arnoldi"
+    selection_fraction: 0.3
+    recursion_depth: 30
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_50percent"
+    method: "arnoldi"
+    selection_fraction: 0.5
+    recursion_depth: 40
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_70percent"
+    method: "arnoldi"
+    selection_fraction: 0.7
+    recursion_depth: 50
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  - name: "arnoldi_90percent"
+    method: "arnoldi"
+    selection_fraction: 0.9
+    recursion_depth: 60
+    damping: 0.01
+    scale: 25.0
+    num_test_samples: 1
+    pretrain_epochs: 3
+
+  # # TracIn方法 - 不同选择比例
+  # - name: "tracin_01percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.01
+  #   # checkpoints_dir: "best_models" # TracIn需要模型检查点
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+    
+  # - name: "tracin_10percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.1
+  #   # checkpoints_dir: "best_models"
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+
+  # - name: "tracin_30percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.3
+  #   # checkpoints_dir: "best_models"
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+    
+  # - name: "tracin_50percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.5
+  #   # checkpoints_dir: "best_models"
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+    
+  # - name: "tracin_70percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.7
+  #   # checkpoints_dir: "best_models"
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+    
+  # - name: "tracin_90percent"
+  #   method: "tracin"
+  #   selection_fraction: 0.9
+  #   # checkpoints_dir: "best_models"
+  #   # decay: 0.99
+  #   # recursion_depth: 5000
+  #   # damping: 0.0001
+  #   # scale: 10000.0
+
+# DVRL方法 - 不同选择比例
+- name: "dvrl_05percent"
+  method: "dvrl"
+  selection_fraction: 0.05
+  num_epochs: 10 # Default from dvrl.py
+  learning_rate: 0.001 # Default from dvrl.py
+
+# 结果保存配置
+results:
+  save_path: "results"
+  log_path: "logs"
+  models_path: "best_models"
+  comparison_file: "comparison_results.csv" 
