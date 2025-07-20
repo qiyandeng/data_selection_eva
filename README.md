@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 <div align="center">
-  <img src="./image/dseva.png" width="80%" alt="Data Selection Workflow">
+  <img src="./image/dseva.png" width="80%" alt="Data Selectionsurface">
 </div>
 
 The success of supervised deep learning depends on the quantity and quality of labeled training data. However, as training datasets grow larger, they inevitably contain noisy or even harmful instances, increasing computational costs and hindering model performance. Existing data selection strategies typically focus on improving training effectiveness by selecting high-quality data or increasing efficiency by reducing training time without sacrificing accuracy. 
@@ -387,18 +387,7 @@ After running experiments, results are automatically saved in multiple formats:
 ⚙️ **Automated Tuning**: Optimize parameters automatically
 📊 **Grid Search**: Systematic parameter exploration
 
-<!-- ## 📖 Citation
 
-If you find this testbed useful in your research, please cite our paper:
-
-```bibtex
-@article{your-paper-2024,
-  title={Your Paper Title},
-  author={Your Name and Co-authors},
-  journal={Conference/Journal Name},
-  year={2024}
-}
-``` -->
 
 ## 🤝 Contributing
 
@@ -432,13 +421,13 @@ If you find this testbed useful in your research, please cite our paper:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+<!-- ## 🙏 Acknowledgments
 
 We thank the authors of the original papers for their valuable contributions to the field of data selection. This testbed builds upon their foundational work.
 
 ## 📞 Contact
 
-For questions and issues, please open an issue on GitHub or contact the maintainers.
+For questions and issues, please open an issue on GitHub or contact the maintainers. -->
 
 ---
 
