@@ -198,24 +198,86 @@ evaluate_model(
 
 ## 🤖 LLMs SFT Data Selection
 
-*This section is reserved for Large Language Models Supervised Fine-Tuning data selection methods.*
+*This section is dedicated to methods for selecting high-quality data for supervised fine-tuning (SFT) of Large Language Models (LLMs). Each method reflects a different perspective on what constitutes "valuable" data.*
 
-### Methods Comparison Table
+### 🔍 Methods Comparison Table
 
-| Method | Open Source | Repository/Implementation | Notes |
-|--------|-------------|---------------------------|-------|
-| **LESS** | ✅ | [Link to implementation] | Official implementation |
-| **DSIR** | ✅ | [Link to implementation] | Official implementation |
-| **Superfilter** | ✅ | [Link to implementation] | Official implementation |
-| **PPL** | ✅ | [Link to implementation] | Official implementation |
-| **NLL** | ✅ | [Link to implementation] | Official implementation |
-| **BM25** | ✅ | [Link to implementation] | Official implementation |
-| **SHED** | ✅ | [Link to implementation] | Official implementation |
-| **TAGCOS** | ✅ | [Link to implementation] | Official implementation |
-| **RDS** | ✅ | [Link to implementation] | Official implementation |
-| **BM25** | ✅ | [Link to implementation] | Official implementation |
+| Method          | Family                                            | Goal                | Implementation Path / Link                                                                |
+| --------------- | ------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------- |
+| **DSIR**        | <span style="color:#2E8B57;">●</span> Geometry    | Task‑specific       | [`dsir`](https://github.com/p-lambda/dsir)                                                |
+| **BM25**        | <span style="color:#2E8B57;">●</span> Geometry    | Task‑specific       | `sft/data-select/bm25.py`                                                                 |
+| **RDS+**        | <span style="color:#FF6347;">■</span> Gradient    | Task‑specific       | `sft/data-select/rds.py`                                                                  |
+| **LESS**        | <span style="color:#EE82EE;">◆</span> Influence   | Task‑specific       | [`less`](https://github.com/princeton-nlp/LESS)                                           |
+| **SHED**        | <span style="color:#6495ED;">▼</span> Shapley     | Task‑specific       | [`shed`](https://github.com/Lucidreamer9/SHED-Shapley-Based-Automated-Dataset-Refinement) |
+| **Superfilter** | <span style="color:#A9A9A9;">➕</span> Uncertainty | General instruction | [`superfilter`](https://github.com/tianyi-lab/Superfiltering)                             |
+| **PPL Score**   | <span style="color:#A9A9A9;">➕</span> Uncertainty | General instruction | `sft/data-select/ppl_score.py`                                                            |
+| **NLL Score**   | <span style="color:#A9A9A9;">➕</span> Uncertainty | General instruction | `sft/data-select/nll_score.py`                                                            |
+| **SelectIT**    | <span style="color:#A9A9A9;">➕</span> Uncertainty | General instruction | [`selectit`](https://github.com/Blue-Raincoat/SelectIT)                                   |
+| **TAGCOS**      | <span style="color:#FF6347;">■</span> Gradient    | General instruction | [`tagcos`](https://github.com/2003pro/TAGCOS)                                             |
 
-*Note: This table will be populated with LLM-specific data selection methods for supervised fine-tuning scenarios.*
+---
+
+### 🧰 Unified CLI Parameters
+
+We recommend using the following **standardized CLI arguments** for all methods:
+
+* `--input_file`: Path to the input dataset (e.g., merged `.jsonl`)
+* `--model_path`: Pretrained model path (e.g., LLaMA, Mistral, etc.)
+* `--output_file`: Path to the output filtered dataset
+* `--select_ratio`: Ratio of data to select (for scoring-based methods)
+* `--batch_size`: Batch size for inference-based scoring
+* `--query_file`: (For retrieval-based) Query set to match from
+* `--top_n`: (For retrieval-based) Top-k examples to retrieve
+
+---
+
+### 🚀 Example Usage
+
+Below are usage examples per method, using the standardized argument names.
+
+#### 🔸 PPL Score
+
+```bash
+torchrun --nproc_per_node=4 sft/data-select/ppl_score.py \
+    --model_path /path/to/mistral-7b \
+    --input_file /path/to/merged.jsonl \
+    --output_file ppl_scores.jsonl \
+    --batch_size 8
+```
+
+#### 🔸 NLL Score
+
+```bash
+torchrun --nproc_per_node=8 sft/data-select/nll_score.py \
+    --model_path /path/to/llama2-7b \
+    --input_file /path/to/merged.jsonl \
+    --output_file nll_scores.jsonl \
+    --batch_size 16
+```
+
+#### 🔸 BM25
+
+```bash
+python sft/data-select/bm25.py \
+    --input_file /path/to/documents.jsonl \
+    --query_file /path/to/queries.jsonl \
+    --output_file bm25_top100.jsonl \
+    --top_n 100
+```
+
+#### 🔸 RDS+
+
+```bash
+python sft/data-select/rds.py \
+    --input_file /path/to/documents.jsonl \
+    --query_file /path/to/queries.jsonl \
+    --output_file rds_top100.jsonl \
+    --top_n 100 \
+    --model_path bert-base-uncased
+```
+
+> 📌 For third-party methods (DSIR, LESS, SHED, Superfilter, SelectIT, TAGCOS), please refer to their official repositories for setup and usage.
+
 
 ## 📊 Datasets
 
