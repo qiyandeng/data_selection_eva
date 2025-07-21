@@ -142,9 +142,9 @@ evaluate_model(
 
 | Method | Category | Description | Implementation |
 |--------|----------|-------------|----------------|
-| **K-Means** | Model-agnostic | Clustering-based selection using K-means algorithm | ✅ [selection/kmeans.py](selection/kmeans.py) |
-| **Herding** | Model-agnostic | Core-set selection using herding algorithm | ✅ [selection/herding.py](selection/herding.py) |
-| **K-Center Greedy** | Model-agnostic | Greedy k-center clustering for core-set selection | ✅ [selection/kcentergreedy.py](selection/kcentergreedy.py) |
+| **K-Means** | Model-agnostic | Selection using K-means algorithm | ✅ [selection/kmeans.py](selection/kmeans.py) |
+| **Herding** | Model-agnostic | Selection using herding algorithm | ✅ [selection/herding.py](selection/herding.py) |
+| **K-Center Greedy** | Model-agnostic | Greedy k-center clustering for data selection | ✅ [selection/kcentergreedy.py](selection/kcentergreedy.py) |
 | **Random** | Model-agnostic | Random sampling baseline | ✅ [selection/random.py](selection/random.py) |
 | **Full** | Model-agnostic | Full dataset training baseline | ✅ [selection/full.py](selection/full.py) |
 | **CRAIG** | Model-aware | Gradient-based core-set selection | ✅ [selection/craig.py](selection/craig.py) |
@@ -204,10 +204,16 @@ evaluate_model(
 
 | Method | Open Source | Repository/Implementation | Notes |
 |--------|-------------|---------------------------|-------|
-| **Method 1** | ✅ | [Link to implementation] | Official implementation |
-| **Method 2** | ❌ | [Our implementation] | Self-implemented based on paper |
-| **Method 3** | ✅ | [Link to implementation] | Official implementation |
-| **Method 4** | ❌ | [Our implementation] | Self-implemented based on paper |
+| **LESS** | ✅ | [Link to implementation] | Official implementation |
+| **DSIR** | ✅ | [Link to implementation] | Official implementation |
+| **Superfilter** | ✅ | [Link to implementation] | Official implementation |
+| **PPL** | ✅ | [Link to implementation] | Official implementation |
+| **NLL** | ✅ | [Link to implementation] | Official implementation |
+| **BM25** | ✅ | [Link to implementation] | Official implementation |
+| **SHED** | ✅ | [Link to implementation] | Official implementation |
+| **TAGCOS** | ✅ | [Link to implementation] | Official implementation |
+| **RDS** | ✅ | [Link to implementation] | Official implementation |
+| **BM25** | ✅ | [Link to implementation] | Official implementation |
 
 *Note: This table will be populated with LLM-specific data selection methods for supervised fine-tuning scenarios.*
 
