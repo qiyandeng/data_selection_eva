@@ -14,16 +14,19 @@ Although numerous data selection methods have been proposed, ranging from effici
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Deep Learning Data Selection](#deep-learning-data-selection)
-- [LLMs SFT Data Selection](#llms-sft-data-selection)
-- [Datasets](#datasets)
-- [Evaluation Metrics](#evaluation-metrics)
-- [Citation](#citation)
-- [License](#license)
+- [Overview](#-overview)
+- [Architecture](#-architecture)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Deep Learning Data Selection](#-deep-learning-data-selection)
+- [LLMs SFT Data Selection](#-llms-sft-data-selection)
+- [Datasets](#-datasets)
+- [Evaluation Metrics](#-evaluation-metrics)
+- [Configuration](#-configuration)
+- [Usage Examples](#-usage-examples)
+- [Running Experiments](#-running-experiments)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ## 🎯 Overview
 
